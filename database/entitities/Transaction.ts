@@ -17,7 +17,9 @@ export class Transaction {
   @Column({ type: "numeric" })
   amount: number;
 
-  @ManyToOne(() => Client, (client) => client.transactions)
+  @ManyToOne(() => Client, (client) => client.transactions, {
+    onDelete: "SET NULL",
+  })
   @JoinColumn({ name: "client_id" }) // untuk membuat foreignkey
   client: Client;
 }

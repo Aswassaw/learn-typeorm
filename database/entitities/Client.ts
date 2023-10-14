@@ -5,7 +5,7 @@ import { Banker } from "./Banker";
 
 @Entity("clients")
 export class Client extends Person {
-  @Column({ type: "numeric" })
+  @Column({ type: "integer" })
   balance: number;
 
   @Column({ default: true })
@@ -23,6 +23,6 @@ export class Client extends Person {
   @OneToMany(() => Transaction, (transaction) => transaction.client)
   transactions: Transaction[];
 
-  @ManyToMany(() => Banker)
+  @ManyToMany(() => Banker, (client) => client.clients, { cascade: false })
   bankers: Banker[];
 }

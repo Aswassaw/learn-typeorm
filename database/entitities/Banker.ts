@@ -7,7 +7,7 @@ export class Banker extends Person {
   @Column({ unique: true, length: 10 })
   employee_number: string;
 
-  @ManyToMany(() => Client)
+  @ManyToMany(() => Client, (client) => client.bankers, { cascade: false })
   @JoinTable({
     name: "bankers_clients",
     joinColumn: {
@@ -19,5 +19,5 @@ export class Banker extends Person {
       referencedColumnName: "id",
     },
   })
-  clients: Client[]; 
+  clients: Client[];
 }
